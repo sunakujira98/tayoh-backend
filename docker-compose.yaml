@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: db_tayoh_rewrite
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db_tayoh_rewrite
+    ports:
+      - 54321:5432
+    volumes:
+      - ./files/sql:/docker-entrypoint-initdb.d
+
+  pgweb:
+    image: sosedoff/pgweb
+    container_name: app_pgweb_tayoh_rewrite
+    restart: unless-stopped
+    ports:
+      - 8085:8081
+    links:
+      - postgres:postgres
+    environment:
+      - DATABASE_URL=postgres://postgres:password@postgres:5432/db_tayoh_rewrite?sslmode=disable
