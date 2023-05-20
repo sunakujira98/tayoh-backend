@@ -1,9 +1,9 @@
 package main
 
 import (
-	"tayoh-backend//migration"
-	"tayoh-backend//route"
 	"tayoh-backend/database"
+	"tayoh-backend/database/migration"
+	"tayoh-backend/route"
 
 	"github.com/gofiber/fiber/v2"
 )
